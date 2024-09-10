@@ -1,1 +1,0 @@
-/Users/charlie/github.com/charlieroth/the-rust-book/traits/target/debug/traits: /Users/charlie/github.com/charlieroth/the-rust-book/traits/src/lib.rs /Users/charlie/github.com/charlieroth/the-rust-book/traits/src/main.rs
