@@ -4,16 +4,20 @@ fn main() {
     let (tx, rx) = mpsc::channel::<String>();
 
     thread::spawn(move || {
-        thread::sleep(Duration::from_secs(1));
+        let msgs = vec![
+            String::from("hi"),
+            String::from("from"),
+            String::from("the"),
+            String::from("thread"),
+        ];
 
-        match tx.send(String::from("hi")) {
-            Ok(_) => println!("Transmitter sent message"),
-            Err(e) => println!("Transmitter failed to send message {e}"),
-        };
+        for msg in msgs {
+            tx.send(msg).expect("Transmitter failed to send message");
+            thread::sleep(Duration::from_millis(500));
+        }
     });
 
-    match rx.recv() {
-        Ok(msg) => println!("Received: {msg}"),
-        Err(e) => println!("Receiver failed to receive a message: {e}"),
-    };
+    for msg in rx {
+        println!("Received: {msg}");
+    }
 }
