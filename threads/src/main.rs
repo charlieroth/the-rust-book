@@ -14,4 +14,14 @@ fn main() {
     }
 
     handle.join().unwrap();
+
+    let v = vec![1, 2, 3];
+    // Use `move` to force closure to take ownership of the values
+    // it's using rather than allowing Rust to infer that is should
+    // borrow the values
+    let handle = thread::spawn(move || {
+        println!("A vector {v:?}");
+    });
+
+    handle.join().unwrap();
 }
